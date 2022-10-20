@@ -89,6 +89,8 @@ abstract contract ERC20 is IERC20{
     // ====== PRIVATE OR INTERNAL FUNCTION ====== //
     // can use only in this function cannot call to other
     // internal to use other contract
+
+    // test done
     function _transfer(address from, address to, uint amount) public {
         require(from != address(0), "Transfer from zero address");
         require(to !=  address(0), "Transfer to zero address");
@@ -109,6 +111,7 @@ abstract contract ERC20 is IERC20{
         emit Approval(owner, spender, amount);
     }
 
+    // test done
     // minting token 
     function _mint(address to, uint amount) public{
         require(to != address(0), "Mint to zero address");
@@ -121,6 +124,7 @@ abstract contract ERC20 is IERC20{
         emit Transfer(address(0), to, amount);
     }
 
+    // test done
     // burn token if more than 
     function _burn(address from, uint amount) public{
         require(from != address(0), "Burn to zero address");
