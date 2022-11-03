@@ -136,15 +136,13 @@ describe("JFK-token", function () {
         // test nested mapping allowance
         expect(await token._allowance(owner.address, investor1.address)).to.equal(utils.parseUnits("10000", 18));
         expect(await token._balances(owner.address)).to.equal(utils.parseUnits("1000000", 18));
+        expect(await token.allowance(owner.address, investor1.address)).to.equal(utils.parseUnits("10000", 18));
 
-        // allowance transfer
-        // const tx3 = await token.connect(investor1)._transfer(investor1.address, investor2.address, utils.parseUnits("4000", 18));
-        // await tx3.wait()
+        // error
+        const tx3 = await token.connect(investor1)._transfer(investor1.address, investor2.address, utils.parseUnits("1", 18));
+        await tx3.wait()
 
-        // balance transfer by allowance
-        // expect(await token._balances(investor2.address)).to.equal(utils.parseUnits("4000", 18));
-        // expect(await token._balances(owner.address)).to.equal(utils.parseUnits("996000", 18));
-        // expect(await token._allowance(owner.address, investor1.address)).to.equal(utils.parseUnits("6000", 18));
-
+        expect(await token._balances(investor2.address)).to.equal(utils.parseUnits("1", 18))
+        expect(await token._balances(owner.address)).to.equal(utils.parseUnits("1000000", 18));
     })
 });
